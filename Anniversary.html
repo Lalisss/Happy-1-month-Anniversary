@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>เซอร์ไพรส์รัก 💘</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('your-couple-photo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Kanit', sans-serif;
+      color: white;
+      text-shadow: 1px 1px 2px black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 10px;
+      border: none;
+      margin-top: 10px;
+      z-index: 1;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+    }
+
+    #letter {
+      display: none;
+      white-space: pre-wrap;
+      border-left: 4px solid #fff;
+      padding-left: 20px;
+      font-size: 1.3em;
+      max-width: 600px;
+      z-index: 1;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      position: fixed;
+      transform: rotate(45deg);
+      animation: floatUp 4s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        bottom: 0;
+        opacity: 1;
+      }
+      100% {
+        bottom: 100%;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <h1 style="z-index:1;">ใส่รหัสลับก่อนนะที่รัก 🔐</h1>
+  <input type="password" id="password" placeholder="รหัสลับของเรา 💬">
+  <button onclick="checkPassword()">ปลดล็อกข้อความ 💘</button>
+
+  <div id="letter"></div>
+
+  <script>
+    const secret = "iloveyou"; // เปลี่ยนรหัสได้เลย
+    const message = `ถึงคนที่น่ารักที่สุดของเค้า 💖\n\nสุขสันต์วันครบรอบนะจ๊ะ 🎉\nทุกวินาทีที่มีเธอคือความสุขของเค้า\nขอบคุณที่อยู่ด้วยกันเสมอ 🥰\n\nขอให้เรามีกันและกันแบบนี้ไปตลอดนะ 💕`;
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      if (input === secret) {
+        document.getElementById("letter").style.display = "block";
+        document.querySelector("input").style.display = "none";
+        document.querySelector("button").style.display = "none";
+        document.querySelector("h1").textContent = "ถึงเธอ... 💌";
+        typeWriter();
+        launchHearts();
+      } else {
+        alert("รหัสผิดน้า ลองใหม่อีกที 💡");
+      }
+    }
+
+    let i = 0;
+    function typeWriter() {
+      const letter = document.getElementById("letter");
+      if (i < message.length) {
+        letter.textContent += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+      }
+    }
+
+    function launchHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }, 300);
+    }
+  </script>
+</body>
+</html>
